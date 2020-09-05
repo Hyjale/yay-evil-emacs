@@ -20,7 +20,7 @@ indentation width you prefer in the ~web-mode~ section.)
     :preface
     (defvar ian/indent-width 4) ; change this value to your preferred width
     :config
-    (setq frame-title-format '("hyjale") ; Yayyyyy Evil!
+    (setq frame-title-format '("hyjale")
           ring-bell-function 'ignore       ; minimise distraction
           frame-resize-pixelwise t
           default-directory "~/")
@@ -44,14 +44,15 @@ indentation width you prefer in the ~web-mode~ section.)
     (when (fboundp 'windmove-default-keybindings)
       (windmove-default-keybindings))
 
-    ;; highlight the line where cursor
+    ;;highlight the line where cursor
     (add-hook 'after-init-hook 'global-hl-line-mode)
 
     ;; set to be bar cursor
     (setq-default cursor-type 'bar)
 
     ;; change line spacing
-    (setq-default line-spacing 0.3)
+    (setq-default line-spacing 0.15)
+
 #+END_SRC
 * Configuration for built-in packages
 Since we're using use-package as our package management system, we
@@ -177,7 +178,7 @@ Reduce the highlight delay to instantly.
     :init (setq show-paren-delay 0)
     :config (show-paren-mode +1))
 #+END_SRC
-** Setting up some frame defaults
+** COMMENT Setting up some frame defaults
 Maximise the frame by default on start-up. Set the font to size 12.
 #+BEGIN_SRC emacs-lisp
   (use-package frame
@@ -193,7 +194,7 @@ Maximise the frame by default on start-up. Set the font to size 12.
     :ensure nil
     :config
     (setq initial-frame-alist '((fullscreen . maximized)))
-    (ian/set-default-font))
+    (ian/set-default-font))               ;
 #+END_SRC
 ** Ediff tweaks
 Enter ediff with side-by-side buffers to better compare the
@@ -256,7 +257,7 @@ Normally, we need to add ~:ensure t~ to tell ~use-package~ to download packages 
 *** Load custom theme
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-  (load-theme 'atom-one-dark t) ; an orginal theme created by me.
+  (load-theme 'doom-one t)
 #+END_SRC
 *** Dashboard welcome page
 #+BEGIN_SRC emacs-lisp
@@ -264,7 +265,7 @@ Normally, we need to add ~:ensure t~ to tell ~use-package~ to download packages 
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-startup-banner 'logo
-          dashboard-banner-logo-title "Hell yeah!"
+          dashboard-banner-logo-title "'The start is the half' - Korean proverb"
           dashboard-items nil
           dashboard-set-footer nil))
 #+END_SRC
