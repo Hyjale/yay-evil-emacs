@@ -48,7 +48,7 @@ indentation width you prefer in the ~web-mode~ section.)
     (add-hook 'after-init-hook 'global-hl-line-mode)
 
     ;; set to be bar cursor
-    (setq-default cursor-type 'bar) 
+    (setq-default cursor-type 'bar)
 
     ;; change line spacing
     (setq-default line-spacing 0.3)
@@ -187,8 +187,8 @@ Maximise the frame by default on start-up. Set the font to size 12.
       (when (member "Consolas" (font-family-list))
         (set-face-attribute 'default nil :family "Consolas"))
       (set-face-attribute 'default nil
-                          :height 120	
-  		 	  :width 'normal
+                          :height 120
+              :width 'normal
                           :weight 'extra-bold))
     :ensure nil
     :config
@@ -256,7 +256,7 @@ Normally, we need to add ~:ensure t~ to tell ~use-package~ to download packages 
 *** Load custom theme
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-  (load-theme 'wilmersdorf t) ; an orginal theme created by me.
+  (load-theme 'atom-one-dark t) ; an orginal theme created by me.
 #+END_SRC
 *** Dashboard welcome page
 #+BEGIN_SRC emacs-lisp
@@ -264,7 +264,7 @@ Normally, we need to add ~:ensure t~ to tell ~use-package~ to download packages 
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-startup-banner 'logo
-          dashboard-banner-logo-title "Yay Evil!"
+          dashboard-banner-logo-title "Hell yeah!"
           dashboard-items nil
           dashboard-set-footer nil))
 #+END_SRC
@@ -420,7 +420,7 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
     (setq web-mode-code-indent-offset 2)   ; JS/JSX/TS/TSX
     (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 #+END_SRC
-** Treemacs 
+** Treemacs
 #+BEGIN_SRC emacs-lisp
   (use-package treemacs
   :ensure t
@@ -492,7 +492,7 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
- 
+
 #+END_SRC
 
 ** symon
