@@ -49,6 +49,9 @@ indentation width you prefer in the ~web-mode~ section.)
 
     ;; set to be bar cursor
     (setq-default cursor-type 'bar) 
+
+    ;; change line spacing
+    (setq-default line-spacing 0.3)
 #+END_SRC
 * Configuration for built-in packages
 Since we're using use-package as our package management system, we
