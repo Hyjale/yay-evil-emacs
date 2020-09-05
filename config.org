@@ -37,6 +37,18 @@ indentation width you prefer in the ~web-mode~ section.)
     ;; Always use spaces for indentation
     (setq-default indent-tabs-mode nil
                   tab-width ian/indent-width))
+    ;; add line numbers
+    (global-linum-mode 1)
+
+    ;; Windmove - move from window with shift+arrow key
+    (when (fboundp 'windmove-default-keybindings)
+      (windmove-default-keybindings))
+
+    ;; highlight the line where cursor
+    (add-hook 'after-init-hook 'global-hl-line-mode)
+
+    ;; set to be bar cursor
+    (setq-default cursor-type 'bar) 
 #+END_SRC
 * Configuration for built-in packages
 Since we're using use-package as our package management system, we
@@ -172,8 +184,9 @@ Maximise the frame by default on start-up. Set the font to size 12.
       (when (member "Consolas" (font-family-list))
         (set-face-attribute 'default nil :family "Consolas"))
       (set-face-attribute 'default nil
-                          :height 120
-                          :weight 'normal))
+                          :height 120	
+  		 	  :width 'normal
+                          :weight 'extra-bold))
     :ensure nil
     :config
     (setq initial-frame-alist '((fullscreen . maximized)))
@@ -404,32 +417,8 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
     (setq web-mode-code-indent-offset 2)   ; JS/JSX/TS/TSX
     (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 #+END_SRC
-** Miscellaneous
-*** Diminish minor modes
-The diminish package is used to hide unimportant minor modes in the
-modeline. It provides the ~:diminish~ keyword we've been using in
-other use-package declarations.
+** Treemacs 
 #+BEGIN_SRC emacs-lisp
-  (use-package diminish
-    :demand t)
-#+END_SRC
-*** Which-key
-Provides us with hints on available keystroke combinations.
-#+BEGIN_SRC emacs-lisp
-  (use-package which-key
-    :diminish which-key-mode
-    :config
-    (which-key-mode +1)
-    (setq which-key-idle-delay 0.4
-          which-key-idle-secondary-delay 0.4))
-#+END_SRC
-*** Configure PATH on macOS
-#+BEGIN_SRC emacs-lisp
-  (use-package exec-path-from-shell
-    :config (when (memq window-system '(mac ns x))
-              (exec-path-from-shell-initialize)))
-#+END_SRC
-#+BEGIN_SRC treemacs
   (use-package treemacs
   :ensure t
   :defer t
@@ -503,3 +492,53 @@ Provides us with hints on available keystroke combinations.
  
 #+END_SRC
 
+** symon
+#+BEGIN_SRC emacs-lisp
+  (use-package symon
+  :init
+  (require 'symon)
+  (symon-mode))
+#+END_SRC
+
+** dimmer
+#+BEGIN_SRC emacs-lisp
+  (use-package dimmer
+  :init
+  (require 'dimmer)
+  (dimmer-configure-which-key)
+  (dimmer-configure-helm)
+  (dimmer-mode t))
+#+END_SRC
+
+** vterm
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm
+  :init
+  (require 'vterm))
+#+END_SRC
+
+** Miscellaneous
+*** Diminish minor modes
+The diminish package is used to hide unimportant minor modes in the
+modeline. It provides the ~:diminish~ keyword we've been using in
+other use-package declarations.
+#+BEGIN_SRC emacs-lisp
+  (use-package diminish
+    :demand t)
+#+END_SRC
+*** Which-key
+Provides us with hints on available keystroke combinations.
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :diminish which-key-mode
+    :config
+    (which-key-mode +1)
+    (setq which-key-idle-delay 0.4
+          which-key-idle-secondary-delay 0.4))
+#+END_SRC
+*** Configure PATH on macOS
+#+BEGIN_SRC emacs-lisp
+  (use-package exec-path-from-shell
+    :config (when (memq window-system '(mac ns x))
+              (exec-path-from-shell-initialize)))
+#+END_SRC
