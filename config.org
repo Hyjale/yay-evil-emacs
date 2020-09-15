@@ -20,7 +20,7 @@ indentation width you prefer in the ~web-mode~ section.)
     :preface
     (defvar ian/indent-width 4) ; change this value to your preferred width
     :config
-    (setq frame-title-format '("hyjale")
+    (setq frame-title-format '("emacs")
           ring-bell-function 'ignore       ; minimise distraction
           frame-resize-pixelwise t
           default-directory "~/")
@@ -265,7 +265,7 @@ Normally, we need to add ~:ensure t~ to tell ~use-package~ to download packages 
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-startup-banner 'logo
-          dashboard-banner-logo-title "'The start is the half' - Korean proverb"
+          dashboard-banner-logo-title "Welcome!"
           dashboard-items nil
           dashboard-set-footer nil))
 #+END_SRC
@@ -358,7 +358,8 @@ purpose.
         (setf (nth 2 ido-decorations) "\n")))
 
     (setq ido-everywhere t
-          ido-enable-flex-matching t))
+          ido-enable-flex-matching t)
+    (global-set-key (kbd "M-i") 'ido-switch-buffer))
 
   ; BUG against Emacs 27.1: temporary disable and use above snippet instead
   ;; (use-package ido-vertical-mode

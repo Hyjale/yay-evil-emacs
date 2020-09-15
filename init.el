@@ -46,5 +46,10 @@
 (require 'org)
 (org-babel-load-file (expand-file-name (concat user-emacs-directory "config.org")))
 
+;; saves session after exit
+(desktop-save-mode 1)
+
+(server-start)
+
 (provide 'init)
 ;;; init.el ends here
