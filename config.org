@@ -535,8 +535,6 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
 ** centaur-tabs
 #+BEGIN_SRC emacs-lisp
 (use-package centaur-tabs
-  :init
-  (setq centaur-tabs-enable-key-bindings t)
   :ensure t
   :config
   (setq centaur-tabs-style 'wave
@@ -547,6 +545,8 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
         centaur-tabs-set-modified-marker t
         centaur-tabs-modified-marker "•")
   (centaur-tabs-mode t))
+  (global-set-key (kbd "<C-iso-lefttab>") 'centaur-tabs-backward)
+  (global-set-key (kbd "<C-tab>") 'centaur-tabs-forward)
 #+END_SRC
 
 ** Miscellaneous
