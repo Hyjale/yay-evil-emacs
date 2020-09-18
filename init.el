@@ -30,7 +30,7 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
-;; (package-refresh-contents)
+;;(package-refresh-contents)
 
 ;; workaround bug in Emacs 26.2
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -47,7 +47,7 @@
 (org-babel-load-file (expand-file-name (concat user-emacs-directory "config.org")))
 
 ;; saves session after exit
-(desktop-save-mode 1)
+;; (desktop-save-mode 1)
 
 (server-start)
 

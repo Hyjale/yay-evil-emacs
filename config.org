@@ -53,6 +53,16 @@ indentation width you prefer in the ~web-mode~ section.)
     ;; change line spacing
     (setq-default line-spacing 0.15)
 
+    (defvar grep-and-find-map (make-sparse-keymap))
+    (define-key global-map "\C-xf" grep-and-find-map)
+    (define-key global-map "\C-xfg" 'find-grep-dired)
+    (define-key global-map "\C-xff" 'find-name-dired)
+    (define-key global-map "\C-xfl" (lambda (dir pattern)
+        (interactive "DFind-name locate-style (directory):
+        \nsFind-name locate-style (filename wildcard): ")
+        (find-dired dir (concat "-name '*" pattern "*'"))))
+        (define-key global-map "\C-xg" 'grep)
+
 #+END_SRC
 * Configuration for built-in packages
 Since we're using use-package as our package management system, we
@@ -520,6 +530,20 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
   (use-package vterm
   :init
   (require 'vterm))
+#+END_SRC
+
+** centaur-tabs
+#+BEGIN_SRC emacs-lisp
+(use-package centaur-tabs
+  :ensure t
+  :config
+  (setq centaur-tabs-set-bar 'over
+        centaur-tabs-set-icons t
+        centaur-tabs-gray-out-icons 'buffer
+        centaur-tabs-height 24
+        centaur-tabs-set-modified-market t
+        centaur-tabs-modified-market ".")
+        (centaur-tabs-mode t))
 #+END_SRC
 
 ** Miscellaneous
