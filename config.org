@@ -535,15 +535,18 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
 ** centaur-tabs
 #+BEGIN_SRC emacs-lisp
 (use-package centaur-tabs
+  :init
+  (setq centaur-tabs-enable-key-bindings t)
   :ensure t
   :config
-  (setq centaur-tabs-set-bar 'over
+  (setq centaur-tabs-style 'wave
+        centaur-tabs-set-bar 'under
         centaur-tabs-set-icons t
         centaur-tabs-gray-out-icons 'buffer
         centaur-tabs-height 24
-        centaur-tabs-set-modified-market t
-        centaur-tabs-modified-market ".")
-        (centaur-tabs-mode t))
+        centaur-tabs-set-modified-marker t
+        centaur-tabs-modified-marker "•")
+  (centaur-tabs-mode t))
 #+END_SRC
 
 ** Miscellaneous
