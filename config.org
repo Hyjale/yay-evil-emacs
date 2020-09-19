@@ -32,11 +32,8 @@ indentation width you prefer in the ~web-mode~ section.)
     (setq scroll-margin 0
           scroll-conservatively 101 ; > 100
           scroll-preserve-screen-position t
-          auto-window-vscroll nil)
+          auto-window-vscroll nil))
 
-    ;; Always use spaces for indentation
-    (setq-default indent-tabs-mode nil
-                  tab-width ian/indent-width))
     ;; add line numbers
     (global-linum-mode 1)
 
@@ -53,6 +50,7 @@ indentation width you prefer in the ~web-mode~ section.)
     ;; change line spacing
     (setq-default line-spacing 0.15)
 
+    ;; grep
     (defvar grep-and-find-map (make-sparse-keymap))
     (define-key global-map "\C-xf" grep-and-find-map)
     (define-key global-map "\C-xfg" 'find-grep-dired)
@@ -62,6 +60,39 @@ indentation width you prefer in the ~web-mode~ section.)
         \nsFind-name locate-style (filename wildcard): ")
         (find-dired dir (concat "-name '*" pattern "*'"))))
         (define-key global-map "\C-xg" 'grep)
+
+    ; START TABS CONFIG
+    (setq custom-tab-width 2)
+    ;; Two callable functions for enabling/disabling tabs in Emacs
+    (defun disable-tabs () (setq indent-tabs-mode nil))
+    (defun enable-tabs  ()
+    (local-set-key (kbd "TAB") 'tab-to-tab-stop)
+    (setq indent-tabs-mode t)
+    (setq tab-width custom-tab-width))
+
+    ;; Hooks to Enable Tabs
+    (add-hook 'prog-mode-hook 'enable-tabs)
+    ;; Hooks to Disable Tabs
+    (add-hook 'lisp-mode-hook 'disable-tabs)
+    (add-hook 'emacs-lisp-mode-hook 'disable-tabs)
+
+    ;; Making electric-indent behave sanely
+    (setq-default electric-indent-inhibit t)
+
+    ;; Make the backspace properly erase the tab instead of
+    ;; removing 1 space at a time.
+    (setq backward-delete-char-untabify-method 'hungry)
+
+    ;; WARNING: This will change your life
+    ;; (OPTIONAL) Visualize tabs as a pipe character - "|"
+    ;; This will also show trailing characters as they are useful to spot.
+    (setq whitespace-style '(face tabs tab-mark trailing))
+    (custom-set-faces
+    '(whitespace-tab ((t (:foreground "#636363")))))
+    (setq whitespace-display-mappings
+    '((tab-mark 9 [124 9] [92 9]))) ; 124 is the ascii ID for '\|'
+    (global-whitespace-mode) ; Enable whitespace mode everywhere
+    ; END TABS CONFIG
 
 #+END_SRC
 * Configuration for built-in packages
@@ -537,8 +568,8 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
 (use-package centaur-tabs
   :ensure t
   :config
-  (setq centaur-tabs-style 'wave
-        centaur-tabs-set-bar 'under
+  (setq centaur-tabs-style 'bar
+        centaur-tabs-set-bar 'over
         centaur-tabs-set-icons t
         centaur-tabs-gray-out-icons 'buffer
         centaur-tabs-height 24
