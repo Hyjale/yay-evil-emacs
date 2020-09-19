@@ -33,7 +33,7 @@
 ;;(package-refresh-contents)
 
 ;; workaround bug in Emacs 26.2
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; Setting up the package manager. Install if missing.
 (unless (package-installed-p 'use-package)
@@ -45,11 +45,6 @@
 ;; Load main config file "./config.org"
 (require 'org)
 (org-babel-load-file (expand-file-name (concat user-emacs-directory "config.org")))
-
-;; saves session after exit
-;; (desktop-save-mode 1)
-
-(server-start)
 
 (provide 'init)
 ;;; init.el ends here
