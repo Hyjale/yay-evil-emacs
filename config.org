@@ -25,12 +25,6 @@ indentation width you prefer in the ~web-mode~ section.)
           frame-resize-pixelwise t
           default-directory "~/")
 
-    ;; saves session after exit
-    (desktop-save-mode 1)
-
-    ;; start emacs server
-    (server-start)
-
     (tool-bar-mode -1)
     (menu-bar-mode -1)
 
@@ -39,9 +33,11 @@ indentation width you prefer in the ~web-mode~ section.)
           scroll-conservatively 101 ; > 100
           scroll-preserve-screen-position t
           auto-window-vscroll nil))
+
     ;; Always use spaces for indentation
     (setq-default indent-tabs-mode nil
                 tab-width ian/indent-width)
+
     ;; add line numbers
     (global-linum-mode 1)
 
@@ -227,19 +223,19 @@ Reduce the highlight delay to instantly.
     :init (setq show-paren-delay 0)
     :config (show-paren-mode +1))
 #+END_SRC
-** COMMENT Setting up some frame defaults
+** Setting up some frame defaults
 Maximise the frame by default on start-up. Set the font to size 12.
 #+BEGIN_SRC emacs-lisp
   (use-package frame
     :preface
     (defun ian/set-default-font ()
       (interactive)
-      (when (member "Consolas" (font-family-list))
-        (set-face-attribute 'default nil :family "Consolas"))
+      (when (member "Fira Code" (font-family-list)) ;; https://github.com/tonsky/FiraCode/wiki/Installing
+        (set-face-attribute 'default nil :family "Fira Code"))
       (set-face-attribute 'default nil
-                          :height 120
-              :width 'normal
-                          :weight 'extra-bold))
+                          :height 115
+                          :width 'normal
+                          :weight 'normal))
     :ensure nil
     :config
     (setq initial-frame-alist '((fullscreen . maximized)))
@@ -548,16 +544,6 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
   (symon-mode))
 #+END_SRC
 
-** dimmer
-#+BEGIN_SRC emacs-lisp
-  (use-package dimmer
-  :init
-  (require 'dimmer)
-  (dimmer-configure-which-key)
-  (dimmer-configure-helm)
-  (dimmer-mode t))
-#+END_SRC
-
 ** vterm
 #+BEGIN_SRC emacs-lisp
   (use-package vterm
@@ -607,3 +593,4 @@ Provides us with hints on available keystroke combinations.
     :config (when (memq window-system '(mac ns x))
               (exec-path-from-shell-initialize)))
 #+END_SRC
+

@@ -3,6 +3,10 @@
 ;;; Commentary:
 ;;; A lightweight Emacs config containing only the essentials: shipped with a custom theme!
 ;;; Code:
+
+;; start emacs server
+(server-start)
+
 (defvar file-name-handler-alist-original file-name-handler-alist)
 
 (setq gc-cons-threshold most-positive-fixnum
@@ -31,9 +35,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 ;;(package-refresh-contents)
-
-;; workaround bug in Emacs 26.2
-;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; Setting up the package manager. Install if missing.
 (unless (package-installed-p 'use-package)
