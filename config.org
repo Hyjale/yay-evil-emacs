@@ -18,7 +18,7 @@ indentation width you prefer in the ~web-mode~ section.)
 #+BEGIN_SRC emacs-lisp
   (use-package emacs
     :preface
-    (defvar ian/indent-width 4) ; change this value to your preferred width
+    (defvar ian/indent-width 2) ; change this value to your preferred width
     :config
     (setq frame-title-format '("emacs")
           ring-bell-function 'ignore       ; minimise distraction
@@ -566,6 +566,14 @@ Markdown mode and Web mode, the latter covers our usages of HTML/CSS/JS/JSX/TS/T
   (centaur-tabs-mode t))
   (global-set-key (kbd "<C-iso-lefttab>") 'centaur-tabs-backward)
   (global-set-key (kbd "<C-tab>") 'centaur-tabs-forward)
+  (defun centaur-tabs-buffer-groups ()
+      "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `centaur-tabs-get-group-name' with project name."
+      (list
+       "GROUP"))
 #+END_SRC
 
 ** Miscellaneous
